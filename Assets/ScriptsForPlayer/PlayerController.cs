@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0, -gravity, 0);
+
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();
         HungerImage = GameObject.Find("HungerImage").GetComponent<Image>();

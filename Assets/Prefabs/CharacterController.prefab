@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 616438440236167291}
   - component: {fileID: 3184776743522858600}
   - component: {fileID: 3327299549888070906}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3595075037114628401}
   - component: {fileID: 1158934396663739360}
   - component: {fileID: 6106590934314269357}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 8938984443654559884}
   - component: {fileID: 2994850668314325458}
   - component: {fileID: 8739242830859042214}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TreeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 6799310354296773955}
   - component: {fileID: 9051857272992575509}
   - component: {fileID: 6655997468810426304}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 5055150967825463155}
   - component: {fileID: 5330902849098379134}
   - component: {fileID: 2778366084949426069}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WaterCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
