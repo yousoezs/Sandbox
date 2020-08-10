@@ -27,6 +27,7 @@ public class MobController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Player = GameObject.Find("Player").GetComponent<Rigidbody>();
 
         Physics.gravity = new Vector3(0, gravity, 0);
@@ -83,9 +84,20 @@ public class MobController : MonoBehaviour
 
     }
 
-    public void Target()
+    private void Target()
     {
-        
+        float closeEnough = Vector3.Distance(Player.transform.position, transform.position);
+        bool playerIsClose = closeEnough <= 7;
+
+        if (Player.GetComponent<PlayerController>().Health > 0 && playerIsClose)
+        {
+            agent.enabled = true;
+            GetComponent<NavMeshAgent>().destination = Player.position;
+        }
+        else
+        {
+            agent.enabled = false;
+        }
     }
 }
     

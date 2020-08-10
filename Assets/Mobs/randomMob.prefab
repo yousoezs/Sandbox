@@ -158,8 +158,9 @@ MonoBehaviour:
   timer: 8
   currentIdleTimer: 3
   idleTimer: 4
+  distance: 8
   idle: 0
-  Health: 100
+  enemyHealth: 100
   maxHealth: 100
 --- !u!195 &2436203138404294222
 NavMeshAgent:
