@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
-        Physics.gravity = new Vector3(0, -gravity, 0);
 
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();
@@ -69,6 +68,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Physics.gravity = new Vector3(0, -gravity, 0);
+
         Move();
         Jump();
         Swimming();
