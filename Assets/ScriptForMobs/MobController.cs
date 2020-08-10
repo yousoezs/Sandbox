@@ -5,37 +5,71 @@ using UnityEngine.AI;
 
 public class MobController : MonoBehaviour
 {
-    private Rigidbody randomMobs;
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
 
-    public float mobMovement = 120f;
-    private float gravity = 30.81f;
+    public float radius;
+    public float timer;
+    private float currentTime;
+    public float currentIdleTimer;
+    public float idleTimer;
 
+    private Transform target;
+
+    public bool idle;
+
+    private float gravity = 28.81f;
     public float Health = 100f;
     public float maxHealth;
+
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        randomMobs = GetComponent<Rigidbody>();
         Physics.gravity = new Vector3(0, gravity, 0);
         Health = maxHealth;
+    }
+
+    private void OnEnable()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        currentTime = timer;
+        currentIdleTimer = idleTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MobMove();
+        currentTime +=  Time.deltaTime;
+        currentIdleTimer += Time.deltaTime;
+
+        if(currentIdleTimer >= idleTimer)
+        {
+            StartCoroutine("switchIdle");
+        }
+
+        if(currentTime >= timer && !idle)
+        {
+            Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
+            agent.SetDestination(NewPosition);
+            currentTime = 0;
+        }
     }
-    public void MobMove()
+
+    IEnumerator switchIdle()
     {
-        if (randomMobs.gameObject.transform.position.y == 8.72)
-            {
-
-            agent.transform.position = new Vector3(-10, 0, 10);
-            }
+        idle = true;
+        yield return new WaitForSeconds(3);
+        currentIdleTimer = 0;
+        idle = false;
     }
 
+    public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layerMask)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * distance;
+        randomDirection += origin;
 
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randomDirection, out navHit, distance, layerMask);
 
+        return navHit.position;
+    }
 }
