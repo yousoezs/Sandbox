@@ -19,10 +19,15 @@ public class MobController : MonoBehaviour
     private Transform target;
 
     public bool idle;
+    public static bool isPlayerAlive = true;
 
     private float gravity = 28.81f;
     public float enemyHealth = 100f;
     public float maxHealth;
+    private float enemyDamage = 10;
+    private int hitCount = 10;
+    private float hitTime = 2;
+    float curTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +52,12 @@ public class MobController : MonoBehaviour
     void Update()
     {
         Target();
+        Timer();
+
+        if (curTime >= hitTime)
+        {
+            Damage();
+        }
 
         currentTime +=  Time.deltaTime;
         currentIdleTimer += Time.deltaTime;
@@ -61,6 +72,14 @@ public class MobController : MonoBehaviour
             Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
             agent.SetDestination(NewPosition);
             currentTime = 0;
+        }
+    }
+
+    private void Timer()
+    {
+        if (hitCount > 0) // if there are several hits left
+        {
+            curTime += Time.deltaTime; // adds time
         }
     }
 
@@ -99,5 +118,19 @@ public class MobController : MonoBehaviour
             agent.enabled = false;
         }
     }
+    private void Damage()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast (transform.position, transform.forward, out hit))
+        {
+            if(hit.collider.gameObject.tag == "Player")
+            {
+                hit.collider.gameObject.GetComponent<PlayerController>().Health -= enemyDamage;
+                curTime = 0;
+                hitCount--;
+            }
+        }
+    }
+
 }
     
