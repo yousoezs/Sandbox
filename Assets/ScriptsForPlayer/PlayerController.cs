@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         PlayerBars();
         StatsLoss();
     }
-
+    
     private void StatsLoss()
     {
         if (player.gameObject.transform.position.y < -1)

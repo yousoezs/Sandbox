@@ -19,13 +19,13 @@ public class MobController : MonoBehaviour
     private Transform target;
 
     public bool idle;
-    public static bool isPlayerAlive = true;
 
     private float gravity = 28.81f;
     public float enemyHealth = 100f;
     public float maxHealth;
+
     private float enemyDamage = 10;
-    private int hitCount = 10;
+    private int hitCount = 100;
     private float hitTime = 2;
     float curTime = 0;
 
