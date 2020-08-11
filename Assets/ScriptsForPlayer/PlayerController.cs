@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
 {
     private GameObject Blueberry;
     public LayerMask BlueBerry;
-    private bool isFood;
+    public bool isFood;
     public Transform BerryCheck;
-    public float berryDistance = 0.4f;
+    public float berryDistance = 2f;
 
     public float HealthDecreaseRate = 3f;
     public float HealthIncreaseRate = 5f;
@@ -185,13 +185,21 @@ public class PlayerController : MonoBehaviour
     }
     public void Eat()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if(Blueberry)
             {
-                Stamina += 10;
-                Destroy(Blueberry);
-                print("Yummy with blueberries!");
+                if (Health >= 100 && Stamina >= 100)
+                {
+                     print("You have full health & Stamina!");
+                }
+                else
+                {
+                if (Health <= 100 && Stamina <= 100)
+                     Health += 10f;
+                     Stamina += 10f;
+                     Destroy(Blueberry);
+                     print("Your Stats have refilled!");
+                }
             }
         }
     }

@@ -22,10 +22,6 @@ public class BlueBerry : MonoBehaviour
 
     public void Berry()
     {
-        if (Player)
-        {
-            GetComponent<PlayerController>().Eat();
-            Destroy(Blueberry);
-        } 
+
     }
 }

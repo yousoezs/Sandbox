@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1845868846384950421}
   - component: {fileID: 1845868846384950422}
   - component: {fileID: 1845868846384950423}
-  - component: {fileID: 1845868846384950420}
   m_Layer: 0
   m_Name: BerryCheck
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845868846384950418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.157, y: -0.871, z: 0.344}
+  m_LocalPosition: {x: 0.306, y: 0.873, z: 0.746}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 7884346881531419617}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1845868846384950420
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845868846384950418}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1942394758640073613
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942394758640073613}
   m_LocalRotation: {x: 0.7077807, y: -0.021557638, z: 0.016073247, w: 0.7059203}
-  m_LocalPosition: {x: 0, y: -0.869, z: 0.002}
-  m_LocalScale: {x: 1.0000001, y: 0.32171583, z: -0.07327642}
+  m_LocalPosition: {x: 0.245, y: 0.046, z: 0.746}
+  m_LocalScale: {x: 0.7480259, y: 0.24065174, z: -0.05481265}
   m_Children: []
   m_Father: {fileID: 7884346881531419617}
   m_RootOrder: 0
@@ -203,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3231586278087039807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.74500036, z: 0.11000061}
+  m_LocalPosition: {x: 0.152, y: 1.76, z: 0.574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7884346881531419617}
@@ -300,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4319877417361101172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014, y: 0.22393227, z: -0.09}
+  m_LocalPosition: {x: 0.325, y: 0.845, z: 0.746}
   m_LocalScale: {x: 0.12713677, y: 0.09773893, z: 0.12713677}
   m_Children: []
   m_Father: {fileID: 7884346881531419617}
@@ -384,8 +370,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6812106841875834653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.22, y: 5.02, z: 37.26}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.058634, y: 0.67892, z: 0.20946}
+  m_LocalScale: {x: 0.61425, y: 0.61425, z: 0.61425}
   m_Children:
   - {fileID: 616438440236167291}
   - {fileID: 3419348431160263467}
@@ -402,7 +388,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6812106841875834653}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: af334b767c247ba4b9d0dbbe0ec74918, type: 3}
 --- !u!23 &4740508962747840385
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -422,7 +408,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 056b36fe82754fd4e8662209044f0181, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -489,8 +475,9 @@ MonoBehaviour:
   BlueBerry:
     serializedVersion: 2
     m_Bits: 2048
+  isFood: 0
   BerryCheck: {fileID: 1845868846384950421}
-  berryDistance: 0.4
+  berryDistance: 2
   HealthDecreaseRate: 20
   HealthIncreaseRate: 0
   StaminaDecreaseRate: 15
@@ -502,7 +489,7 @@ MonoBehaviour:
   maxStamina: 100
   maxHunger: 150
   Movement: 100
-  groundDistance: 0.4
+  groundDistance: 1
   JumpHeight: 20
   Ground:
     serializedVersion: 2
@@ -549,8 +536,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7448600989488464127}
   m_LocalRotation: {x: 0.994532, y: -0.06532329, z: -0.08146591, w: -0.00155249}
-  m_LocalPosition: {x: 0, y: -0.9699998, z: 0}
-  m_LocalScale: {x: 1, y: 0.034578, z: 1}
+  m_LocalPosition: {x: 0.268, y: 0.99, z: 0.749}
+  m_LocalScale: {x: 0.15564, y: 0.00538172, z: 0.15564}
   m_Children: []
   m_Father: {fileID: 7884346881531419617}
   m_RootOrder: 2

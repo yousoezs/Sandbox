@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MobController : MonoBehaviour
+public class SvampGolem : MonoBehaviour
 {
     NavMeshAgent agent;
     private Rigidbody Player;
@@ -21,10 +21,10 @@ public class MobController : MonoBehaviour
     public bool idle;
 
     private float gravity = 28.81f;
-    public float enemyHealth = 100f;
-    public float maxHealth;
+    public float golemHealth = 1000f;
+    public float golemMaxHealth;
 
-    private float enemyDamage = 10;
+    private float golemDamage = 40;
     private int hitCount = 100;
     private float hitTime = 2;
     float curTime = 0;
@@ -32,14 +32,12 @@ public class MobController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         Player = GameObject.Find("Player").GetComponent<Rigidbody>();
 
-        Physics.gravity = new Vector3(0, gravity, 0);
+        Physics.gravity = new Vector3(0, -gravity, 0);
 
-        enemyHealth = maxHealth;
+        golemHealth = golemMaxHealth;
     }
-        
 
     private void OnEnable()
     {
@@ -48,33 +46,27 @@ public class MobController : MonoBehaviour
         currentIdleTimer = idleTimer;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-        Target();
+        TargetSvamp();
         Timer();
 
         if (curTime >= hitTime)
         {
-            Damage();
+            DamageSvamp();
         }
 
-        currentTime +=  Time.deltaTime;
+        currentTime += Time.deltaTime;
         currentIdleTimer += Time.deltaTime;
 
-        if(currentIdleTimer >= idleTimer)
+        if (currentIdleTimer >= idleTimer)
         {
             StartCoroutine("switchIdle");
         }
-
-        //if(currentTime >= timer && !idle)
-        //{
-        //    Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
-        //    agent.SetDestination(NewPosition);
-        //    currentTime = 0;
-        //}
     }
-
     private void Timer()
     {
         if (hitCount > 0) // if there are several hits left
@@ -102,11 +94,10 @@ public class MobController : MonoBehaviour
         return navHit.position;
 
     }
-
-    private void Target()
+    private void TargetSvamp()
     {
         float closeEnough = Vector3.Distance(Player.transform.position, transform.position);
-        bool playerIsClose = closeEnough <= 7;
+        bool playerIsClose = closeEnough <= 15;
 
         if (Player.GetComponent<PlayerController>().Health > 0 && playerIsClose)
         {
@@ -123,19 +114,17 @@ public class MobController : MonoBehaviour
             }
         }
     }
-    private void Damage()
+    private void DamageSvamp()
     {
         RaycastHit hit;
-        if (Physics.Raycast (transform.position, transform.forward, out hit))
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            if(hit.collider.gameObject.tag == "Player" && hit.distance <= 3)
+            if (hit.collider.gameObject.tag == "Player" && hit.distance <= 3)
             {
-                hit.collider.gameObject.GetComponent<PlayerController>().Health -= enemyDamage;
+                hit.collider.gameObject.GetComponent<PlayerController>().Health -= golemDamage;
                 curTime = 0;
                 hitCount--;
             }
         }
     }
-
 }
-    
