@@ -53,7 +53,7 @@ public class MobController : MonoBehaviour
     {
         Target();
         Timer();
-
+        
         if (curTime >= hitTime)
         {
             Damage();

@@ -17,7 +17,7 @@ public class SvampGolemSpawn : SvampGolem
     // Update is called once per frame
     void Update()
     {
-        if (Golem.gameObject.GetComponent<SvampGolem>().golemHealth == 0)
+        if (Golem.gameObject.GetComponent<SvampGolem>().golemHealth <= 0)
         {
             print("You have killed the golem! But watchout, he can respawn!");
         }

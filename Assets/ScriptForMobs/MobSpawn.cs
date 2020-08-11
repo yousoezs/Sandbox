@@ -18,6 +18,16 @@ public class MobSpawn : MobController
     // Update is called once per frame
     void Update()
     {
+        if (randomMob.gameObject.GetComponent<MobController>().enemyHealth <= 0)
+        {
+            Destroy(randomMob);
+            print("You gained 20 Experience!");
+        }
+    }
 
+    IEnumerator MobRespawn()
+    {
+        yield return new WaitForSeconds(10);
+        randomMob.gameObject.transform.position = this.transform.position;
     }
 }

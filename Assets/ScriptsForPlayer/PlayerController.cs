@@ -10,6 +10,11 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private float Damage = 15f;
+    private float hitTime = 3;
+    float curTime = 0;
+    public int hitCount = 99999999;
+
     private GameObject Blueberry;
     public LayerMask BlueBerry;
     public bool isFood;
@@ -76,6 +81,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Physics.gravity = new Vector3(0, -gravity, 0);
+        if(curTime >= hitTime)
+        {
+            Attack();
+        }
 
         Move();
         Jump();
@@ -84,8 +93,17 @@ public class PlayerController : MonoBehaviour
         PlayerBars();
         StatsLoss();
         Eat();
+        AttackTimer();
     }
-    
+
+    private void AttackTimer()
+    {
+        if (curTime > 0)
+        {
+            curTime += Time.deltaTime;
+        }
+    }
+
     private void StatsLoss()
     {
         if (player.gameObject.transform.position.y < -1)
@@ -201,6 +219,23 @@ public class PlayerController : MonoBehaviour
                      print("Your Stats have refilled!");
                 }
             }
+        }
+    }
+    private void Attack()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            RaycastHit hit;
+            if(Physics.Raycast (transform.position, Input.mousePosition, out hit))
+            {
+                if(hit.collider.gameObject.tag == "Monster" && hit.distance <= 7)
+                {
+                    hit.collider.gameObject.GetComponent<MobController>().enemyHealth -= Damage;
+                    curTime = 0;
+                    hitCount--;
+                }
+            }
+
         }
     }
 }    
