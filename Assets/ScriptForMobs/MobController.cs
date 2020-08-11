@@ -67,12 +67,12 @@ public class MobController : MonoBehaviour
             StartCoroutine("switchIdle");
         }
 
-        if(currentTime >= timer && !idle)
-        {
-            Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
-            agent.SetDestination(NewPosition);
-            currentTime = 0;
-        }
+        //if(currentTime >= timer && !idle)
+        //{
+        //    Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
+        //    agent.SetDestination(NewPosition);
+        //    currentTime = 0;
+        //}
     }
 
     private void Timer()
@@ -115,7 +115,12 @@ public class MobController : MonoBehaviour
         }
         else
         {
-            agent.enabled = false;
+            if (currentTime >= timer && !idle)
+            {
+                Vector3 NewPosition = RandomNavSphere(transform.position, radius, -1);
+                agent.SetDestination(NewPosition);
+                currentTime = 0;
+            }
         }
     }
     private void Damage()

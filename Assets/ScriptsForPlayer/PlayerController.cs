@@ -10,6 +10,12 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameObject Blueberry;
+    public LayerMask BlueBerry;
+    private bool isFood;
+    public Transform BerryCheck;
+    public float berryDistance = 0.4f;
+
     public float HealthDecreaseRate = 3f;
     public float HealthIncreaseRate = 5f;
     public float StaminaDecreaseRate = 5f;
@@ -55,6 +61,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
+        Blueberry = GameObject.Find("/Bush/BlueBerry");
 
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();
@@ -76,6 +83,7 @@ public class PlayerController : MonoBehaviour
         Climbing();
         PlayerBars();
         StatsLoss();
+        Eat();
     }
     
     private void StatsLoss()
@@ -120,7 +128,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Movement = 200f;
-
         }
         else
         {
@@ -173,6 +180,18 @@ public class PlayerController : MonoBehaviour
             {
                 player.velocity = new Vector3(0, Climb, 0);
                 Stamina -= StaminaDecreaseRate * Time.deltaTime;
+            }
+        }
+    }
+    public void Eat()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if(Blueberry)
+            {
+                Stamina += 10;
+                Destroy(Blueberry);
+                print("Yummy with blueberries!");
             }
         }
     }
