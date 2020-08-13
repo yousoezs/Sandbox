@@ -619,6 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a15d6007ebb764b97a84578d7db6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitCount: 99999999
   BlueBerry:
     serializedVersion: 2
     m_Bits: 2048
@@ -666,12 +667,12 @@ Animation:
   m_GameObject: {fileID: 6812106841875834653}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ffe8c5729598b2347a2b85e5e84b7766, type: 2}
+  m_Animation: {fileID: 7400000, guid: e9da9cdc97b6f04449d84a28ff398fec, type: 2}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_CullingType: 1
 --- !u!95 &8760430998689013334
 Animator:
   serializedVersion: 3

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MobSpawn : MobController
 {
+    public bool Dead;
+    public float deadTimer;
+
     public GameObject MobBody;
     public GameObject randomMob;
     
@@ -18,16 +21,25 @@ public class MobSpawn : MobController
     // Update is called once per frame
     void Update()
     {
+        deadTimer += Time.deltaTime;
+
         if (randomMob.gameObject.GetComponent<MobController>().enemyHealth <= 0)
         {
-            Destroy(randomMob);
-            print("You gained 20 Experience!");
+            StartCoroutine("Respawn");
         }
     }
-
-    IEnumerator MobRespawn()
+    IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(10);
-        randomMob.gameObject.transform.position = this.transform.position;
+
+        {
+            Destroy(randomMob);
+            Dead = true;
+            print("You gained 20 Experience!");
+            yield return new WaitForSeconds(10);
+            deadTimer = 10;
+            Dead = false;
+            randomMob.gameObject.transform.position = this.transform.position;
+
+        }
     }
 }

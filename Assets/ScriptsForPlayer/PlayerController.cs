@@ -5,15 +5,16 @@ using System.Collections.Specialized;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static bool triggeringWithAI;
+    public static GameObject triggeringAI;
+
     private float Damage = 15f;
-    private float hitTime = 3;
-    float curTime = 0;
-    public int hitCount = 99999999;
 
     private GameObject Blueberry;
     public LayerMask BlueBerry;
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
     public Transform TreeCheck;
     public bool LiveTree;
 
+    private GameObject RandomMob;
+
     public float MovementSpeed { get { return this.Movement; } set { this.Movement = value; } }
     public Rigidbody RigidbodyComponent { get { return this.player; } }
 
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody>();
         Blueberry = GameObject.Find("/Bush/BlueBerry");
+        RandomMob = GameObject.Find("RandomMob").GetComponent<GameObject>();
 
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();
@@ -81,10 +85,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Physics.gravity = new Vector3(0, -gravity, 0);
-        if(curTime >= hitTime)
-        {
-            Attack();
-        }
 
         Move();
         Jump();
@@ -93,14 +93,22 @@ public class PlayerController : MonoBehaviour
         PlayerBars();
         StatsLoss();
         Eat();
-        AttackTimer();
-    }
 
-    private void AttackTimer()
-    {
-        if (curTime > 0)
+        if (triggeringWithAI)
         {
-            curTime += Time.deltaTime;
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack(triggeringAI);
+            }
+        }
+    }
+    public void Attack(GameObject target)
+    {
+        if(target.tag == "Monster")
+        {
+            MobController mob = target.GetComponent<MobController>();
+
+            mob.enemyHealth -= Damage;
         }
     }
 
@@ -143,7 +151,7 @@ public class PlayerController : MonoBehaviour
             float inputX = Input.GetAxis("Horizontal"); // Left/Right
             float inputZ = Input.GetAxis("Vertical"); // Forward/Back
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && Stamina > 0)
         {
             Movement = 200f;
         }
@@ -221,21 +229,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void Attack()
+    public void OnTriggerEnter(Collider other)
     {
-        if(Input.GetMouseButton(0))
+        if(other.tag == "Monster")
         {
-            RaycastHit hit;
-            if(Physics.Raycast (transform.position, Input.mousePosition, out hit))
-            {
-                if(hit.collider.gameObject.tag == "Monster" && hit.distance <= 7)
-                {
-                    hit.collider.gameObject.GetComponent<MobController>().enemyHealth -= Damage;
-                    curTime = 0;
-                    hitCount--;
-                }
-            }
-
+            triggeringAI = other.gameObject;
+            triggeringWithAI = true;
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Monster")
+        {
+            triggeringAI = null;
+            triggeringWithAI = false;
         }
     }
 }    
