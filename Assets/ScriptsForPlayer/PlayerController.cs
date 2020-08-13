@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour
         Climbing();
         PlayerBars();
         StatsLoss();
-        Eat();
 
         if (triggeringWithAI)
         {
@@ -209,26 +208,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    public void Eat()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            {
-                if (Health >= 100 && Stamina >= 100)
-                {
-                     print("You have full health & Stamina!");
-                }
-                else
-                {
-                if (Health <= 100 && Stamina <= 100)
-                     Health += 10f;
-                     Stamina += 10f;
-                     Destroy(Blueberry);
-                     print("Your Stats have refilled!");
-                }
-            }
-        }
-    }
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Monster")
