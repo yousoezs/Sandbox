@@ -21,7 +21,16 @@ public class MobSpawn : MobController
     // Update is called once per frame
     void Update()
     {
-        deadTimer += Time.deltaTime;
+        if (randomMob.gameObject.GetComponent<MobController>().enemyHealth <= 0)
+        {
+            deadTimer += Time.deltaTime;
+            Dead = true;
+        }
+        else
+        {
+            deadTimer = 0;
+            Dead = false;
+        }
 
         if (randomMob.gameObject.GetComponent<MobController>().enemyHealth <= 0)
         {
@@ -33,12 +42,9 @@ public class MobSpawn : MobController
 
         {
             Destroy(randomMob);
-            Dead = true;
             print("You gained 20 Experience!");
             yield return new WaitForSeconds(10);
-            deadTimer = 10;
-            Dead = false;
-            randomMob.gameObject.transform.position = this.transform.position;
+            randomMob = (GameObject)Instantiate(MobBody, this.transform.position, Quaternion.identity);
 
         }
     }
