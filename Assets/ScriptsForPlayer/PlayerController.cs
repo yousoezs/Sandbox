@@ -110,7 +110,6 @@ public class PlayerController : MonoBehaviour
             mob.enemyHealth -= Damage;
         }
     }
-
     private void StatsLoss()
     {
         if (player.gameObject.transform.position.y < -1)

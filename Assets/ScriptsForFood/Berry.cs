@@ -20,32 +20,33 @@ public class Berry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(triggeringWithBerry)
+        if (triggeringBerry)
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
                 Eat(triggeringBerry);
             }
         }
-
     }
-
     public void Eat(GameObject target)
     {
         if (target.tag == "Berry")
         {
-            
-            if (Player.Health <= 100)
+            PlayerController player = target.GetComponent<PlayerController>();
+            if (player.Hunger < 100)
             {
-                Player.Health += 10;
-                Player.Stamina += 10;
-                print("You refilled your stats");
+                player.Health += 10;
+                player.Hunger += 10;
+                print("You have filled your hunger!");
                 Destroy(Blueberry);
             }
+
             else
             {
-                if(Player.Health > 100)
-                print("You have full stats!");
+                if (player.Hunger >= 100)
+                {
+                    print("You have full hunger!");
+                }
             }
         }
     }
