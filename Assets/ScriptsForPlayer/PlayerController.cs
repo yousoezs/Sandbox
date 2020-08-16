@@ -17,10 +17,6 @@ public class PlayerController : MonoBehaviour
     private float Damage = 15f;
 
     private GameObject Blueberry;
-    public LayerMask BlueBerry;
-    public bool isFood;
-    public Transform BerryCheck;
-    public float berryDistance = 2f;
 
     public float HealthDecreaseRate = 3f;
     public float HealthIncreaseRate = 5f;
@@ -60,7 +56,7 @@ public class PlayerController : MonoBehaviour
     public Transform TreeCheck;
     public bool LiveTree;
 
-    private GameObject RandomMob;
+
 
     public float MovementSpeed { get { return this.Movement; } set { this.Movement = value; } }
     public Rigidbody RigidbodyComponent { get { return this.player; } }
@@ -69,8 +65,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
-        Blueberry = GameObject.Find("/Bush/BlueBerry");
-        RandomMob = GameObject.Find("RandomMob").GetComponent<GameObject>();
+        Blueberry = GameObject.Find("/Bush/BlueBerry");    
 
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();

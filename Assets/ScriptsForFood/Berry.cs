@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Berry : MonoBehaviour
 {
     public static bool triggeringWithBerry;
     public static GameObject triggeringBerry;
+
+    public bool berries;
 
     private PlayerController Player;
     private GameObject Blueberry;
@@ -20,9 +23,9 @@ public class Berry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (triggeringBerry)
+        if (triggeringWithBerry)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Eat(triggeringBerry);
             }
@@ -33,21 +36,30 @@ public class Berry : MonoBehaviour
         if (target.tag == "Berry")
         {
             PlayerController player = target.GetComponent<PlayerController>();
-            if (player.Hunger < 100)
+            if(player == Input.GetKeyDown(KeyCode.F))
+            if(player.Health < 100)
             {
                 player.Health += 10;
                 player.Hunger += 10;
-                print("You have filled your hunger!");
+                print("You refilled your hunger!");
                 Destroy(Blueberry);
             }
-
             else
             {
-                if (player.Hunger >= 100)
+                if(player.Health >= 100)
                 {
-                    print("You have full hunger!");
+                    print("You have full stats!");
                 }
             }
+        }
+    }
+
+    public void OnCollisionEnter(Collision berries)
+    {
+        if(Player)
+        {
+            
+
         }
     }
 
@@ -59,7 +71,6 @@ public class Berry : MonoBehaviour
             triggeringWithBerry = true;
         }
     }
-
     public void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
