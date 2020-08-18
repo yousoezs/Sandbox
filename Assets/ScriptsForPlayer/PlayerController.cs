@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody>();
-        Blueberry = GameObject.Find("/Bush/BlueBerry");    
+        Blueberry = GameObject.Find("/Bush/BlueBerry");
 
         HealthImage = GameObject.Find("HealthImage").GetComponent<Image>();
         StaminaImage = GameObject.Find("StaminaImage").GetComponent<Image>();
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Attack(GameObject target)
     {
-        if(target.tag == "Monster")
+        if (target.tag == "Monster")
         {
             MobController mob = target.GetComponent<MobController>();
 
@@ -109,12 +109,12 @@ public class PlayerController : MonoBehaviour
     {
         if (player.gameObject.transform.position.y < -1)
         {
-            if(Health > 0)
+            if (Health > 0)
                 Health -= HealthDecreaseRate * Time.deltaTime;
         }
         else
         {
-            if(Health < maxHealth)
+            if (Health < maxHealth)
                 Health += HealthIncreaseRate * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftShift))
@@ -127,22 +127,19 @@ public class PlayerController : MonoBehaviour
             if (Stamina < maxStamina)
                 Stamina += StaminaIncreaseRate * Time.deltaTime;
         }
-        if (Hunger <= maxHunger)
-        {
-            Hunger -= HungerDecreaseRate * Time.deltaTime;
-        }
+        Hunger -= HungerDecreaseRate * Time.deltaTime;
     }
-        private void PlayerBars()
-        {
-            HealthImage.GetComponent<RectTransform>().localScale = new Vector3(Health / 650, 0.15f, 0);
-            StaminaImage.GetComponent<RectTransform>().localScale = new Vector3(Stamina / 650, 0.15f, 0);
-            HungerImage.GetComponent<RectTransform>().localScale = new Vector3(Hunger / 1000, 0.15f, 0);
-        }
+    private void PlayerBars()
+    {
+        HealthImage.GetComponent<RectTransform>().localScale = new Vector3(Health / 650, 0.15f, 0);
+        StaminaImage.GetComponent<RectTransform>().localScale = new Vector3(Stamina / 650, 0.15f, 0);
+        HungerImage.GetComponent<RectTransform>().localScale = new Vector3(Hunger / 1000, 0.15f, 0);
+    }
 
-        public void Move()
-        {
-            float inputX = Input.GetAxis("Horizontal"); // Left/Right
-            float inputZ = Input.GetAxis("Vertical"); // Forward/Back
+    public void Move()
+    {
+        float inputX = Input.GetAxis("Horizontal"); // Left/Right
+        float inputZ = Input.GetAxis("Vertical"); // Forward/Back
 
         if (Input.GetKey(KeyCode.LeftShift) && Stamina > 0)
         {
@@ -153,42 +150,42 @@ public class PlayerController : MonoBehaviour
             Movement = 100f;
         }
 
-            float x = inputX * Movement * Time.deltaTime;
-            float z = inputZ * Movement * Time.deltaTime;
+        float x = inputX * Movement * Time.deltaTime;
+        float z = inputZ * Movement * Time.deltaTime;
 
-            Vector3 desiredposition = transform.position + (transform.right * x + transform.forward * z);
+        Vector3 desiredposition = transform.position + (transform.right * x + transform.forward * z);
 
-            player.MovePosition(desiredposition);
+        player.MovePosition(desiredposition);
 
-            //if (Input.GetKey(KeyCode.W))
-            //    player.velocity = new Vector3(player.velocity.x, player.velocity.y, Movement);
-            //if (Input.GetKey(KeyCode.S))
-            //    player.velocity = new Vector3(player.velocity.x, player.velocity.y, -Movement);
-            //if (Input.GetKey(KeyCode.A))
-            //    player.velocity = new Vector3(-Movement, player.velocity.y, player.velocity.z);
-            //if (Input.GetKey(KeyCode.D))
-            //    player.velocity = new Vector3(Movement, player.velocity.y, player.velocity.z);
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //    player.velocity = new Vector3(player.velocity.x, player.velocity.y, Movement);
+        //if (Input.GetKey(KeyCode.S))
+        //    player.velocity = new Vector3(player.velocity.x, player.velocity.y, -Movement);
+        //if (Input.GetKey(KeyCode.A))
+        //    player.velocity = new Vector3(-Movement, player.velocity.y, player.velocity.z);
+        //if (Input.GetKey(KeyCode.D))
+        //    player.velocity = new Vector3(Movement, player.velocity.y, player.velocity.z);
+    }
 
-        public void Jump()
+    public void Jump()
+    {
+        isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, Ground);
+        if (isGrounded)
         {
-            isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, Ground);
-            if (isGrounded)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                    player.velocity = new Vector3(0, JumpHeight, 0);
-            }
+            if (Input.GetKeyDown(KeyCode.Space))
+                player.velocity = new Vector3(0, JumpHeight, 0);
+        }
 
-        }
-        public void Swimming()
+    }
+    public void Swimming()
+    {
+        isInWater = Physics.CheckSphere(WaterCheck.position, waterDistance, Water);
+        if (player.gameObject.transform.position.y < 0)
         {
-            isInWater = Physics.CheckSphere(WaterCheck.position, waterDistance, Water);
-            if (player.gameObject.transform.position.y < 0)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                    player.velocity = new Vector3(0, Swim, 0);
-            }
+            if (Input.GetKey(KeyCode.Space))
+                player.velocity = new Vector3(0, Swim, 0);
         }
+    }
 
     public void Climbing()
     {
@@ -205,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Monster")
+        if (other.tag == "Monster")
         {
             triggeringAI = other.gameObject;
             triggeringWithAI = true;
@@ -219,4 +216,4 @@ public class PlayerController : MonoBehaviour
             triggeringWithAI = false;
         }
     }
-}    
+}
