@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private Image HealthImage;
     private Image StaminaImage;
     private Image HungerImage;
+    private Image Inventory;
 
     public float Movement = 100f;
     private Rigidbody player;
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         Climbing();
         PlayerBars();
         StatsLoss();
+        Inventories();
 
         if (triggeringWithAI)
         {
@@ -96,6 +98,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void Inventories()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            
+        }
+    }
+
     public void Attack(GameObject target)
     {
         if (target.tag == "Monster")
