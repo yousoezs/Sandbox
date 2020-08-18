@@ -2,44 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Berry : MonoBehaviour
+public class RedBerry : MonoBehaviour
 {
-    public bool triggeringWithBerry;
-    public GameObject triggeringBerry;
+    public bool triggeringWithRedBerry;
+    public GameObject triggeringRedBerry;
 
     private PlayerController Player;
-    private GameObject Blueberry;
-    private GameObject Berri;
+    private GameObject Berry;
 
     // Start is called before the first frame update
     void Start()
     {
-        Blueberry = GameObject.Find("/Bush/BlueBerry");
-        Berri = GameObject.Find("/Bush/Berry");
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        Berry = GameObject.Find("/Bush/Berry");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (triggeringWithBerry)
+        if(triggeringWithRedBerry)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if(Input.GetKeyDown(KeyCode.F))
             {
-                Eat(triggeringBerry);
+                Eat(triggeringRedBerry);
             }
         }
     }
-
     public void Eat(GameObject target)
     {
-        {
             if (Player.Hunger < 150 && target.tag == "Player")
             {
                 Player.Health += 10;
                 Player.Hunger += 10;
-                print("You refilled your hunger!");
-                Destroy(Blueberry);
+                print("You have refilled your stats!");
+                Destroy(Berry);
             }
             else
             {
@@ -48,22 +44,22 @@ public class Berry : MonoBehaviour
                     print("You have full stats!");
                 }
             }
-        }
     }
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            triggeringBerry = other.gameObject;
-            triggeringWithBerry = true;
+            triggeringRedBerry = other.gameObject;
+            triggeringWithRedBerry = true;
         }
     }
     public void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if(other.tag == "Player")
         {
-            triggeringBerry = null;
-            triggeringWithBerry = false;
+            triggeringRedBerry = null;
+            triggeringWithRedBerry = false;
         }
     }
-}   
+}
