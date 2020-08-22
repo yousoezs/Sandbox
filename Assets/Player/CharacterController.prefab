@@ -498,8 +498,10 @@ GameObject:
   - component: {fileID: 6799310354296773955}
   - component: {fileID: 9051857272992575509}
   - component: {fileID: 6655997468810426304}
+  - component: {fileID: 2708631777208020836}
   - component: {fileID: -8661485192239149136}
   - component: {fileID: 8760430998689013334}
+  - component: {fileID: -4242254009176301831}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Player
@@ -619,12 +621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a15d6007ebb764b97a84578d7db6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlueBerry:
-    serializedVersion: 2
-    m_Bits: 2048
-  isFood: 0
-  BerryCheck: {fileID: 1845868846384950421}
-  berryDistance: 2
   HealthDecreaseRate: 20
   HealthIncreaseRate: 0
   StaminaDecreaseRate: 15
@@ -657,6 +653,21 @@ MonoBehaviour:
     m_Bits: 512
   TreeCheck: {fileID: 8938984443654559884}
   LiveTree: 0
+--- !u!114 &2708631777208020836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812106841875834653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76449a8fe2833c4fb4fb7c9c3e481eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 5794340250446088556, guid: af9b65ec69293984ab043419fc7b90e6, type: 3}
+  SlotHolder: {fileID: 6213611941023128539, guid: a6bb23ed07275c544891fab61a121160, type: 3}
+  inventoryEnabled: 0
 --- !u!111 &-8661485192239149136
 Animation:
   m_ObjectHideFlags: 0
@@ -691,6 +702,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &-4242254009176301831
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812106841875834653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1, y: 1.9, z: 0.6}
+  m_Center: {x: 0.25, y: 0.95, z: 0.8}
 --- !u!1 &7448600989488464127
 GameObject:
   m_ObjectHideFlags: 0
