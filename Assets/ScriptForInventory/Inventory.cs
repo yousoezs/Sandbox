@@ -12,14 +12,18 @@ public class Inventory : MonoBehaviour
     private GameObject itemPickedUp;
     private bool itemAdded;
 
-    private int slots;
+    public int slots;
     private Transform[] Slot;
+
+    private GameObject Axe;
 
     public void Start()
     {
+        Axe = GameObject.Find("Axe");
         // slots being detected
         inventory = GameObject.Find("InventoryCanvas");
         SlotHolder = GameObject.Find("/InventoryCanvas/Slot Holder");
+
         slots = SlotHolder.transform.childCount;
         Slot = new Transform[slots];
         DetectInventorySlots();
@@ -34,6 +38,9 @@ public class Inventory : MonoBehaviour
             inventory.SetActive(true);
         else
             inventory.SetActive(false);
+
+        //List for item graveyard!
+
     }
 
     public void OnTriggerEnter(Collider other)
@@ -43,6 +50,10 @@ public class Inventory : MonoBehaviour
             print("Item picked up!");
             itemPickedUp = other.gameObject;
             AddItem(itemPickedUp);
+
+            List<GameObject> itemGraveyard = new List<GameObject>();
+            Axe.SetActive(false);
+
         }
     }
 
