@@ -227,4 +227,9 @@ public class PlayerController : MonoBehaviour
             triggeringWithAI = false;
         }
     }
+
+    public void CutTree(int treeDamage)
+    {
+
+    }
 }

@@ -16,10 +16,14 @@ public class Inventory : MonoBehaviour
     private Transform[] Slot;
 
     private GameObject Axe;
+    private GameObject Log;
+    private GameObject Stick;
 
     public void Start()
     {
         Axe = GameObject.Find("Axe");
+        Log = GameObject.Find("Log(Clone)");
+        Stick = GameObject.Find("Stick(Clone)");
         // slots being detected
         inventory = GameObject.Find("InventoryCanvas");
         SlotHolder = GameObject.Find("/InventoryCanvas/Slot Holder");
@@ -38,9 +42,6 @@ public class Inventory : MonoBehaviour
             inventory.SetActive(true);
         else
             inventory.SetActive(false);
-
-        //List for item graveyard!
-
     }
 
     public void OnTriggerEnter(Collider other)

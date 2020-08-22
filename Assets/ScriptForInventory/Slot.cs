@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public bool hovered;
     public bool emptySlot;
@@ -12,9 +12,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject item;
     public Texture itemIcon;
 
+    private GameObject player;
+
     void Start()
     {
-        
+        hovered = false;
+
+        player = GameObject.FindWithTag("Player");
     }
     void Update()
     {
@@ -40,5 +44,19 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         hovered = false;
+    }
+
+    public void OnPointerClick(PointerEventData eventDate)
+    {
+        if(item)
+        {
+            Item thisItem = item.GetComponent<Item>();
+
+            //Checking for item type
+            if (thisItem.type == "Axe")
+            {
+                player.GetComponent<PlayerController>().CutTree(thisItem.treeDamage);
+            }
+        }
     }
 }
