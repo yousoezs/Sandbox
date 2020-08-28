@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject inventory;
     public GameObject SlotHolder;
+    public GameObject ArmLeft;
     public bool inventoryEnabled;
 
     private GameObject itemPickedUp;
@@ -39,22 +40,18 @@ public class Inventory : MonoBehaviour
             inventoryEnabled = !inventoryEnabled;
         }
         if (inventoryEnabled)
-            inventory.SetActive(true);
+            inventory.GetComponent<Canvas>().enabled = true;
         else
-            inventory.SetActive(false);
+            inventory.GetComponent<Canvas>().enabled = false;
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "item")
+        if (other.tag == "item")
         {
             print("Item picked up!");
             itemPickedUp = other.gameObject;
             AddItem(itemPickedUp);
-
-            List<GameObject> itemGraveyard = new List<GameObject>();
-            Axe.SetActive(false);
-
         }
     }
 
@@ -68,19 +65,37 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
-        for(int i = 0; i < slots; i++)
+        //for loop to check all the slots and add item for each slot if picked up
+        for (int i = 0; i < slots; i++)
         {
-            if(Slot[i].GetComponent<Slot>().emptySlot && itemAdded == false)
+            //Getting script Slot and checks if emptySlot & itemAdded is false
+            if (Slot[i].GetComponent<Slot>().emptySlot && itemAdded == false)
             {
                 Slot[i].GetComponent<Slot>().item = itemPickedUp;
                 Slot[i].GetComponent<Slot>().itemIcon = itemPickedUp.GetComponent<Item>().Icon;
+
+                //If item is clicked, changes item position to ArmLeft
+                item.transform.parent = ArmLeft.transform;
+                item.transform.position = ArmLeft.transform.position;
+
+                item.transform.localPosition = item.GetComponent<Item>().position;
+                item.transform.localEulerAngles = item.GetComponent<Item>().rotation;
+                item.transform.localScale = item.GetComponent<Item>().scale;
+
+                Destroy(item.GetComponent<Rigidbody>());
+
                 itemAdded = true;
+                item.SetActive(false);
+
+                //List<GameObject> itemGraveyard = new List<GameObject>();
+                //Axe.SetActive(false);
             }
         }
     }
 
     public void DetectInventorySlots()
     {
+        //This detects every inventoryslot trough SlotHolder!
         for (int i = 0; i < slots; i++)
         {
             Slot[i] = SlotHolder.transform.GetChild(i);

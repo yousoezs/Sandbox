@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class MouseRotation : MonoBehaviour
 {
+    private bool isCursorVisible = false; 
+
     public float Sensitivity = 300f;
     public Transform player;
 
@@ -30,5 +32,26 @@ public class MouseRotation : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * MouseX);
 
+        MouseState();
+        ShowMouse();
+
+    }
+    public void MouseState()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            isCursorVisible = !isCursorVisible;
+        }
+    }
+    public void ShowMouse()
+    {
+        if(isCursorVisible)
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
     }
 }

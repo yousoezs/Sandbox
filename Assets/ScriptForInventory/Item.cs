@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Texture Icon;
+    private GameObject Player;
 
     public string type;
     public int treeDamage;
@@ -13,5 +14,30 @@ public class Item : MonoBehaviour
     public Vector3 rotation;
     public Vector3 scale;
 
-    private bool pickedUp;
+    public bool pickedUp;
+    public bool equipped;
+
+    public void Start()
+    {
+        Player = GameObject.FindWithTag("Player");
+    }
+
+    public void Update()
+    {
+        if (equipped)
+            Player.GetComponent<PlayerController>().weaponEquipped = true;
+        else
+            Player.GetComponent<PlayerController>().weaponEquipped = false;
+
+        if(equipped)
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+                Unequip();
+        }
+    }
+    public void Unequip()
+    {
+        equipped = false;
+        this.gameObject.SetActive(false);
+    }
 }

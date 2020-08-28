@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     public Transform TreeCheck;
     public bool LiveTree;
 
-
+    public bool weaponEquipped;
 
     public float MovementSpeed { get { return this.Movement; } set { this.Movement = value; } }
     public Rigidbody RigidbodyComponent { get { return this.player; } }
@@ -101,9 +101,9 @@ public class PlayerController : MonoBehaviour
 
     private void Inventories()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            
+
         }
     }
 
@@ -230,6 +230,6 @@ public class PlayerController : MonoBehaviour
 
     public void CutTree(int treeDamage)
     {
-
+        Hunger += 50;
     }
 }
