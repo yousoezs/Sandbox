@@ -230,6 +230,6 @@ public class PlayerController : MonoBehaviour
 
     public void CutTree(int treeDamage)
     {
-        Hunger += 50;
+        Damage += 15;
     }
 }

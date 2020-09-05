@@ -16,6 +16,7 @@ public class Item : MonoBehaviour
 
     public bool pickedUp;
     public bool equipped;
+    public bool weaponInUse;
 
     public void Start()
     {
@@ -29,11 +30,12 @@ public class Item : MonoBehaviour
         else
             Player.GetComponent<PlayerController>().weaponEquipped = false;
 
-        if(equipped)
+        if (equipped = weaponInUse)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
                 Unequip();
         }
+
     }
     public void Unequip()
     {
